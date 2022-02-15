@@ -70,6 +70,7 @@ public class StudentDao {
             return true;
         } catch (HibernateException e) {
             logger.error(e);
+            System.out.println(e);
         }
         return false;
     }

@@ -31,9 +31,9 @@ public class StudentService {
         List<Student> students = studentDao.getAll();
         students.sort((o1, o2) -> o1.getId() < o2.getId() ? 1 : -1);
         int id = students.get(0).getId() + 1;
-
         student.setId(id);
         if (student.getName() == null) {
+            System.out.println("no name");
             return false;
         }
         return studentDao.insert(student);

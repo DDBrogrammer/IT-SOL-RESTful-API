@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.Date;
 import java.util.List;
 
-@Path("/students")
+@Path("students")
 public class StudentController {
 
     StudentService studentService = new StudentService();
@@ -28,20 +28,39 @@ public class StudentController {
     }
 
     @GET
-    @Path("/{attribute}/{value}")
+    @Path("/name/{value}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> searchStudentByStringAttributes(@PathParam("attribute") String attribute, @PathParam("value")  String value) {
-        return studentService.searchListStudentByString(attribute,value);
+    public List<Student> searchStudentByName( @PathParam("value")  String value) {
+        return studentService.searchListStudentByString("name",value);
     }
 
     @GET
-    @Path("/{attribute}/{value}")
+    @Path("/gender/{value}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> searchStudentByFloatAttributes(@PathParam("attribute") String attribute,@PathParam("value")  Float value) {
-        return studentService.searchListStudentByNumber(attribute,value);
+    public List<Student> searchStudentByGender(@PathParam("value")  String value) {
+        return studentService.searchListStudentByString("gender",value);
     }
 
-   /* @GET
+    @GET
+    @Path("/major/{value}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Student> searchStudentByMajor(@PathParam("value")  String value) {
+        return studentService.searchListStudentByString("major",value);
+    }
+
+    @GET
+    @Path("/className/{value}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Student> searchStudentByClassName(@PathParam("value")  String value) {
+        return studentService.searchListStudentByString("className",value);
+    }
+    @GET
+    @Path("/averageMark/{value}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Student> searchStudentByAverageMark(@PathParam("value")  Float value) {
+        return studentService.searchListStudentByNumber("averageMark",value);
+    }
+ /*   @GET
     @Path("/{attribute}/{value}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Student> searchStudentByDateAttributes(@PathParam("attribute") String attribute,@PathParam("value") Date value) {

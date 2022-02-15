@@ -3,7 +3,9 @@ package repository;
 import entity.Student;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
 
@@ -28,6 +30,31 @@ public class StudentDao {
             Query<Student> query = session.createQuery("select s from Student s where s.id = :p_student_id");
             query.setParameter("p_student_id", id);
             return query.getSingleResult();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            logger.error(e);
+        }
+        return null;
+    }
+
+
+    public List<Student> findByStringAttribute(String attributeName,String value) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Student> query = session.createQuery("From Student as st where st."+attributeName+" like :attribute_value");
+            query.setParameter("attribute_value", "%"+value+"%");
+            return query.getResultList();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            logger.error(e);
+        }
+        return null;
+    }
+
+    public List<Student> findByFloatAttribute(String attributeName,float value) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Student> query = session.createQuery("From Student as st where st."+attributeName+" = :attribute_value");
+            query.setFloat("attribute_value", value);
+            return query.getResultList();
         } catch (HibernateException e) {
             e.printStackTrace();
             logger.error(e);

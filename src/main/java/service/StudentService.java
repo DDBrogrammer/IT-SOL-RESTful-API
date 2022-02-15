@@ -9,8 +9,18 @@ public class StudentService {
 
     StudentDao studentDao = new StudentDao();
 
+
+
     public List<Student> getListStudent() {
         return studentDao.getAll();
+    }
+
+    public List<Student> searchListStudentByString(String attribute,String values) {
+        return studentDao.findByStringAttribute(attribute,values);
+    }
+
+    public List<Student> searchListStudentByNumber(String attribute,float values) {
+        return studentDao.findByFloatAttribute(attribute,values);
     }
 
     public Student findID(int id) {

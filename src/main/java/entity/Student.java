@@ -33,6 +33,7 @@ public class Student implements Serializable {
 
     @Column(name = "class_name", nullable = false)
     String className;
+
     @Column(nullable = false)
     String major;
 
